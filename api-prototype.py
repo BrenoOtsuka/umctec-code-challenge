@@ -1,5 +1,7 @@
+import json
+
 from flask import Flask
-from flask import jsonify
+from flask import jsonify, request
 
 app = Flask(__name__)
 
@@ -17,4 +19,12 @@ activities = [
 def get_all_activities():
     return jsonify(activities)
 
+@app.route('/api/v1/activity', methods=['POST'])
+def create_activity():
+    
+    activity = request.json
+    activities.append(activity)
+    
+    return jsonify({'activities' : activities})
+    
 app.run()
