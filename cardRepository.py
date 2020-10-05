@@ -12,13 +12,25 @@ class CardRepository:
         conn.row_factory = sqlite3.Row
         
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM card")
+        cursor.execute("SELECT * FROM Card")
         
         cards = [dict(row) for row in cursor.fetchall()]
         
+        result = []
+        
+        def get_info_from(table, idname):
+            
+            id = card.pop(idname)
+            cursor.execute("SELECT * FROM {} WHERE {} = {}".format(table, idname, id))
+            return dict(cursor.fetchone())
+        
+        for card in cards:
+            
+            card['healthInsurance'] = get_info_from('HealthInsurance', 'healthInsuranceID')
+            card['patient'        ] = get_info_from('Patient'        , 'patientID'        )
+            card['bill'           ] = get_info_from('Bill'           , 'billID'           )
+            result.append(card)
+            
         conn.close()
     
-        return cards
-
-    
-    
+        return result

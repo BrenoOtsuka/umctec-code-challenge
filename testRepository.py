@@ -2,7 +2,7 @@ import unittest
 
 from activityRepository import ActivityRepository
 from cardRepository import CardRepository
-from examples import examples
+from examples import examples, outputs
 
 import database
 
@@ -89,14 +89,22 @@ class TestActivityRepository(unittest.TestCase):
         
     def test_get_all_cards_with_not_empty_dataset(self):
         
-        data = examples.get('cards')
+        cards = examples.get('cards')
+        bills = examples.get('bills')
+        patients = examples.get('patients')
+        healthInjurances = examples.get('healthInsurances')
         
-        database.create_an_initialized_pegcontas_database(self.filename, cards = data)
+        database.create_an_initialized_pegcontas_database(self.filename,
+                                                          cards = cards,
+                                                          healthInjurances=healthInjurances,
+                                                          patients=patients,
+                                                          bills=bills)
+        
         card_repository = CardRepository(self.filename)
         
-        activities = card_repository.get_all()
+        cards = card_repository.get_all()
         
-        self.assertEqual(activities, data)
+        self.assertEqual(cards, outputs.get('cards'))
             
 if __name__ == "__main__":
     
