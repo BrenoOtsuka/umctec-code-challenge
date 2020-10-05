@@ -2,9 +2,9 @@ import sqlite3
 
 def create_activity_table(cursor):
     
-    cursor.execute("""DROP TABLE IF EXISTS activity""")
+    cursor.execute("""DROP TABLE IF EXISTS Activity""")
     cursor.execute( """CREATE TABLE IF NOT EXISTS
-            activity(
+            Activity(
                 activityID INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT NOT NULL,
                 subtitle TEXT NOT NULL,
@@ -15,9 +15,9 @@ def create_activity_table(cursor):
 
 def create_card_table(cursor):
     
-    cursor.execute("""DROP TABLE IF EXISTS card""")
+    cursor.execute("""DROP TABLE IF EXISTS Card""")
     cursor.execute("""CREATE TABLE IF NOT EXISTS
-            card(
+            Card(
                 cardID INTEGER PRIMARY KEY AUTOINCREMENT,
                 daysSinceCreated INTEGER NOT NULL,
                 slaStatus TEXT NOT NULL,
@@ -25,47 +25,55 @@ def create_card_table(cursor):
                 numberOfDocuments INTEGER NOT NULL,
                 numberOfNotReceivedDocuments INTEGER NOT NULL,
                 numberOfChecklistItem INTEGER NOT NULL,
-                numberOfDoneChecklistItem INTEGER NOT NULL
+                numberOfDoneChecklistItem INTEGER NOT NULL,
+                healthInsuranceID INTEGER NOT NULL,
+                FOREIGN KEY(healthInsuranceID) REFERENCES HealthInsurance(healthInsuranceID)
             )      
         """
     )
 
+def create_healthInsurance_table(cursor):
+
+    cursor.execute("""DROP TABLE IF EXISTS HealthInsurance""")
+    cursor.execute("""CREATE TABLE IF NOT EXISTS
+            HealthInsurance(
+                healthInsuranceID INTEGER PRIMARY KEY AUTOINCREMENT,
+                name  TEXT NOT NULL
+            )
+        """
+    )
+                
 def create_an_empty_pegcontas_database(filename):
     
     conn = sqlite3.connect(filename)    
     cursor = conn.cursor()
     
-    create_activity_table(cursor)
     create_card_table(cursor)
-    
+    create_activity_table(cursor)
+    create_healthInsurance_table(cursor)
+        
     conn.commit()
     conn.close()
 
-def create_an_initialized_pegcontas_database(filename, activities = None, cards = None):
+def create_an_initialized_pegcontas_database(filename, activities = [], healthInjurances= [], cards = []):
+    
+    create_an_empty_pegcontas_database(filename)
     
     conn = sqlite3.connect(filename)    
     cursor = conn.cursor()
     
-    create_activity_table(cursor)
-    if activities:
+    def insert_data_row_by_row(tablename, rows):
         
-        for activity in activities:
+        for row in rows:
             
-            columns      = ', '.join(activity.keys())
-            placeholders = ', '.join('?' * len(activity))
-            query  = 'INSERT INTO activity ({}) VALUES ({})'.format(columns, placeholders)
-            cursor.execute(query, tuple(activity.values()))
-    
-    create_card_table(cursor)
-    
-    if cards:
-        
-        for card in cards:
+            columns      = ', '.join(row.keys())
+            placeholders = ', '.join('?' * len(row))
+            query  = 'INSERT INTO {} ({}) VALUES ({})'.format(tablename, columns, placeholders)
+            cursor.execute(query, tuple(row.values()))
             
-            columns      = ', '.join(card.keys())
-            placeholders = ', '.join('?' * len(card))
-            query  = 'INSERT INTO card ({}) VALUES ({})'.format(columns, placeholders)
-            cursor.execute(query, tuple(card.values()))
+    insert_data_row_by_row('Activity', activities)
+    insert_data_row_by_row('HealthInsurance', healthInjurances)
+    insert_data_row_by_row('Card', cards)
             
     conn.commit()
     conn.close()

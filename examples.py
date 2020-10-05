@@ -16,7 +16,9 @@ examples = {
             'numberOfDocuments': 0,
             'numberOfNotReceivedDocuments': 1,
             'numberOfChecklistItem': 0,
-            'numberOfDoneChecklistItem': 0
+            'numberOfDoneChecklistItem': 0,
+            'healthInsuranceID': 1,
+            'healthInsuranceID': 1
         },
         {
             'cardID': 2,
@@ -26,7 +28,8 @@ examples = {
             'numberOfDocuments': 1,
             'numberOfNotReceivedDocuments': 0,
             'numberOfChecklistItem': 0,
-            'numberOfDoneChecklistItem': 0
+            'numberOfDoneChecklistItem': 0,
+            'healthInsuranceID': 2
         },
         {
             'cardID': 3,
@@ -36,7 +39,8 @@ examples = {
             'numberOfDocuments': 0,
             'numberOfNotReceivedDocuments': 2,
             'numberOfChecklistItem': 0,
-            'numberOfDoneChecklistItem': 0
+            'numberOfDoneChecklistItem': 0,
+            'healthInsuranceID': 2
         },
         {
             'cardID': 4,
@@ -46,7 +50,8 @@ examples = {
             'numberOfDocuments': 2,
             'numberOfNotReceivedDocuments': 3,
             'numberOfChecklistItem': 0,
-            'numberOfDoneChecklistItem': 0
+            'numberOfDoneChecklistItem': 0,
+            'healthInsuranceID': 3
         },
         {
             'cardID': 5,
@@ -56,7 +61,8 @@ examples = {
             'numberOfDocuments': 2,
             'numberOfNotReceivedDocuments': 3,
             'numberOfChecklistItem': 0,
-            'numberOfDoneChecklistItem': 0
+            'numberOfDoneChecklistItem': 0,
+            'healthInsuranceID': 2
         },
         {
             'cardID': 6,
@@ -66,7 +72,8 @@ examples = {
             'numberOfDocuments': 2,
             'numberOfNotReceivedDocuments': 3,
             'numberOfChecklistItem': 0,
-            'numberOfDoneChecklistItem': 0
+            'numberOfDoneChecklistItem': 0,
+            'healthInsuranceID': 4
         },
         {
             'cardID': 7,
@@ -76,7 +83,8 @@ examples = {
             'numberOfDocuments': 5,
             'numberOfNotReceivedDocuments': 0,
             'numberOfChecklistItem': 0,
-            'numberOfDoneChecklistItem': 0
+            'numberOfDoneChecklistItem': 0,
+            'healthInsuranceID': 5
         },
         {
             'cardID': 8,
@@ -86,7 +94,8 @@ examples = {
             'numberOfDocuments': 2,
             'numberOfNotReceivedDocuments': 3,
             'numberOfChecklistItem': 0,
-            'numberOfDoneChecklistItem': 0
+            'numberOfDoneChecklistItem': 0,
+            'healthInsuranceID': 2
         },
         {
             'cardID': 9,
@@ -96,7 +105,8 @@ examples = {
             'numberOfDocuments': 0,
             'numberOfNotReceivedDocuments': 5,
             'numberOfChecklistItem': 0,
-            'numberOfDoneChecklistItem': 0
+            'numberOfDoneChecklistItem': 0,
+            'healthInsuranceID': 6
         },
         {
             'cardID': 10,
@@ -106,7 +116,16 @@ examples = {
             'numberOfDocuments': 0,
             'numberOfNotReceivedDocuments': 5,
             'numberOfChecklistItem': 0,
-            'numberOfDoneChecklistItem': 0
+            'numberOfDoneChecklistItem': 0,
+            'healthInsuranceID': 2
         }
+    ],
+    'healthInsurance' : [
+        {'healthInsuranceID': 1, 'name': 'Maxima Seguro'},
+        {'healthInsuranceID': 2, 'name': 'Inter Plena'},
+        {'healthInsuranceID': 3, 'name': 'Bio Inter'},
+        {'healthInsuranceID': 4, 'name': 'Unicorp Plan'},
+        {'healthInsuranceID': 5, 'name': 'Saude Plena'},
+        {'healthInsuranceID': 6, 'name': 'Maxima Unicorp'}
     ]
 }
