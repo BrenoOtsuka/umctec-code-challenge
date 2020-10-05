@@ -2,7 +2,7 @@ import unittest
 
 from activityRepository import ActivityRepository
 from cardRepository import CardRepository
-from examples import examples, outputs
+from miniexamples import examples, outputs, add_card_test
 
 import database
 
@@ -105,6 +105,23 @@ class TestActivityRepository(unittest.TestCase):
         cards = card_repository.get_all()
         
         self.assertEqual(cards, outputs.get('cards'))
+    
+    def test_add_card(self):
+        
+        cards = examples.get('cards')
+        bills = examples.get('bills')
+        patients = examples.get('patients')
+        healthInjurances = examples.get('healthInsurances')
+        
+        database.create_an_initialized_pegcontas_database(self.filename,
+                                                          cards = cards,
+                                                          healthInjurances=healthInjurances,
+                                                          patients=patients,
+                                                          bills=bills)
+        
+        card_repository = CardRepository(self.filename)
+        
+        self.assertEqual(card_repository.add(add_card_test[0].get('input')), 0)
             
 if __name__ == "__main__":
     
