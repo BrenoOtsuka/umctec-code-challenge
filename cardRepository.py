@@ -104,7 +104,7 @@ class CardRepository:
         
         return result
 
-    def get_cards_by_patient_name(self, name):
+    def get_cards_by_patientName(self, name):
         
         conn = sqlite3.connect(self.filename)
         conn.row_factory = sqlite3.Row
@@ -113,7 +113,11 @@ class CardRepository:
         cursor.execute('SELECT patientID FROM Patient WHERE name = "{}"'.format(name))
         patient = cursor.fetchone()
         
-        result = self.get_cards_by_some_ID(cursor, 'patientID', patient['patientID'])
+        if patient:
+            
+            result = self.get_cards_by_some_ID(cursor, 'patientID', patient['patientID'])
+        else:
+            result = []
         
         conn.close()
         

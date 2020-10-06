@@ -19,19 +19,19 @@ class TestActivityRepository(unittest.TestCase):
         cards = examples.get('cards')
         bills = examples.get('bills')
         patients = examples.get('patients')
-        healthInjurances = examples.get('healthInsurances')
+        healthInsurances = examples.get('healthInsurances')
         
         database.create_an_initialized_pegcontas_database(self.filename,
                                                           activities= activities,
                                                           cards= cards,
-                                                          healthInjurances= healthInjurances,
+                                                          healthInsurances= healthInsurances,
                                                           patients= patients,
                                                           bills= bills)
         
         data = { 
             'activities' : activities, 
             'cards' : cards, 
-            'healthInjurances' : healthInjurances,
+            'healthInsurances' : healthInsurances,
             'patients' : patients,
             'bills' : bills
         }
@@ -108,7 +108,7 @@ class TestActivityRepository(unittest.TestCase):
         
         _, card_repository, _ = self.init_test_database()
         
-        self.assertEqual(card_repository.get_cards_by_patient_name(test[1].get('input')), test[1].get('output'))
+        self.assertEqual(card_repository.get_cards_by_patientName(test[1].get('input')), test[1].get('output'))
         
     def test_get_card_by_billID(self):
             

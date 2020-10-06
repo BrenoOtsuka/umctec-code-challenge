@@ -23,14 +23,17 @@ The challenge is to build an API to post and get activities and cards
     
 - [x] Get all activities:
 - [x] Create activity
-- [ ] Get cards by activityId
-- [x] Search cards by patientName, visitId or billId
-- [ ] filter by PRIORITY, TO_RECEIVE or TO_SEND
+- [x] Create card
+- [x] Search cards by patientName
+- [x] Search cards by visitId
+- [x] Search cards by billId
+- [x] filter by PRIORITY
+- [x] filter by TO_RECEIVE
+- [x] filter by TO_SEND
 - [ ] page: index of page
 - [ ] perPage: number of elements in each page
 - [ ] totalCardsOk: Number of cards (all pages) with slaStatus OK
 - [ ] totalCardsWarning: Number of cards (all pages) with slaStatus WARNING
 - [ ] totalCardsDelayed: Number of cards (all pages) with slaStatus DELAYED
+- [ ] Get cards by activityId
 - [ ] pageInfo: Add any new fields you think is important to build the pagination component in web page
-
-- [x] Create card

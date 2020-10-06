@@ -88,7 +88,7 @@ def create_an_empty_pegcontas_database(filename):
     conn.commit()
     conn.close()
 
-def create_an_initialized_pegcontas_database(filename, activities=[], healthInjurances=[], patients=[], bills=[], cards=[]):
+def create_an_initialized_pegcontas_database(filename, activities=[], healthInsurances=[], patients=[], bills=[], cards=[]):
     
     create_an_empty_pegcontas_database(filename)
     
@@ -105,7 +105,7 @@ def create_an_initialized_pegcontas_database(filename, activities=[], healthInju
             cursor.execute(query, tuple(row.values()))
             
     insert_data_row_by_row('Activity', activities)    
-    insert_data_row_by_row('HealthInsurance', healthInjurances)
+    insert_data_row_by_row('HealthInsurance', healthInsurances)
     insert_data_row_by_row('Patient', patients)
     insert_data_row_by_row('Bill', bills)
     insert_data_row_by_row('Card', cards)
