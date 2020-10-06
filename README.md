@@ -12,9 +12,9 @@ The challenge is to build an API to post and get activities and cards
 
 - [ ] Document and expose your API with Swagger or alternative;
 - [ ] Create sql tables and rows using Flyway or alternative;
-- [x] Implement unit tests;
+- [x] Implement unit tests; (partialy)
 - [ ] Implement integration tests;
-- [x] Error handling;
+- [x] Error handling; (partialy)
 - [ ] Use spring security to authorize and authenticate the endpoints;
 - [x] You can use any library that simplifies your work;
 - [ ] Host the API on the service of your choice;

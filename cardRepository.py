@@ -6,15 +6,7 @@ class CardRepository:
         
         self.filename = filename
     
-    def get_all(self):
-        
-        conn = sqlite3.connect(self.filename)
-        conn.row_factory = sqlite3.Row
-        
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM Card")
-        
-        cards = [ dict(row) for row in cursor.fetchall() ]
+    def build_cards(self, cursor, cards):
         
         def get_info_from(table, idname):
             
@@ -30,6 +22,20 @@ class CardRepository:
             card['patient'        ] = get_info_from('Patient'        , 'patientID'        )
             card['bill'           ] = get_info_from('Bill'           , 'billID'           )
             result.append(card)
+        
+        return result
+    
+    def get_all(self):
+        
+        conn = sqlite3.connect(self.filename)
+        conn.row_factory = sqlite3.Row
+        
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM Card")
+        
+        cards = [ dict(row) for row in cursor.fetchall() ]
+        
+        result = self.build_cards(cursor, cards)
                         
         conn.close()
     
@@ -63,3 +69,52 @@ class CardRepository:
         insert_in_table('HealthInsurance', healthInsurance)
         
         return 0
+    
+    def get_cards_by_some_ID(self, cursor, name, value):
+        
+        cursor.execute('SELECT * FROM Card WHERE {} = {}'.format(name, value))
+        cards = [ dict(row) for row in cursor.fetchall() ]
+        
+        return self.build_cards(cursor, cards)
+
+    def get_cards_by_billID(self, billID):
+        
+        conn = sqlite3.connect(self.filename)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        result = self.get_cards_by_some_ID(cursor, 'billID', billID)
+        
+        conn.close()
+        
+        return result
+
+    def get_cards_by_visitID(self, visitID):
+        
+        conn = sqlite3.connect(self.filename)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        cursor.execute('SELECT * FROM Card WHERE visitID = {}'.format(visitID))
+        cards = [ dict(row) for row in cursor.fetchall() ]
+        
+        result = self.build_cards(cursor, cards)
+        
+        conn.close()
+        
+        return result
+
+    def get_cards_by_patient_name(self, name):
+        
+        conn = sqlite3.connect(self.filename)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        cursor.execute('SELECT patientID FROM Patient WHERE name = "{}"'.format(name))
+        patient = cursor.fetchone()
+        
+        result = self.get_cards_by_some_ID(cursor, 'patientID', patient['patientID'])
+        
+        conn.close()
+        
+        return result

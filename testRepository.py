@@ -2,7 +2,7 @@ import unittest
 
 from activityRepository import ActivityRepository
 from cardRepository import CardRepository
-from miniexamples import examples, outputs, add_card_test
+from miniexamples import examples, outputs, test
 
 import database
 
@@ -11,6 +11,32 @@ class TestActivityRepository(unittest.TestCase):
     def setUp(self):
         
         self.filename = 'pegcontas.db'
+
+    def init_test_database(self):
+        
+        activities = examples.get('activities')
+        
+        cards = examples.get('cards')
+        bills = examples.get('bills')
+        patients = examples.get('patients')
+        healthInjurances = examples.get('healthInsurances')
+        
+        database.create_an_initialized_pegcontas_database(self.filename,
+                                                          activities= activities,
+                                                          cards= cards,
+                                                          healthInjurances= healthInjurances,
+                                                          patients= patients,
+                                                          bills= bills)
+        
+        data = { 
+            'activities' : activities, 
+            'cards' : cards, 
+            'healthInjurances' : healthInjurances,
+            'patients' : patients,
+            'bills' : bills
+        }
+        
+        return ActivityRepository(self.filename), CardRepository(self.filename), data
         
     def test_get_all_activities_with_empty_dataset(self):
         
@@ -23,14 +49,9 @@ class TestActivityRepository(unittest.TestCase):
         
     def test_get_all_activities_with_not_empty_dataset(self):
         
-        data = examples.get('activities')
-        
-        database.create_an_initialized_pegcontas_database(self.filename, data)
-        activity_repository = ActivityRepository(self.filename)
-        
+        activity_repository, _, data = self.init_test_database()
         activities = activity_repository.get_all()
-        
-        self.assertEqual(activities, data)
+        self.assertEqual(activities, data['activities'])
     
     def test_add_an_activity_in_an_empty_dataset(self):
         
@@ -48,34 +69,20 @@ class TestActivityRepository(unittest.TestCase):
         
     def test_add_an_activity_with_repeated_ID_should_raise_Exception(self):
         
-        data = examples.get('activities')
-        database.create_an_initialized_pegcontas_database(self.filename, data[:1])
-        activity_repository = ActivityRepository(self.filename)
-        
-        activity = data[0]
-        result = activity_repository.add(activity)
-        
+        activity_repository, _, data = self.init_test_database()
+        result = activity_repository.add(data['activities'][0])
         self.assertEqual(result, 1)
         
     def test_add_an_activity_without_activityID(self):
         
-        data = examples.get('activities')
-        database.create_an_initialized_pegcontas_database(self.filename, data)
-        activity_repository = ActivityRepository(self.filename)
-        
-        activity = { 'title': 'OPME', 'subtitle': 'Finalizar conta', 'sla': 5}
-        result = activity_repository.add(activity)
-        
+        activity_repository, _, _ = self.init_test_database()
+        result = activity_repository.add({ 'title': 'OPME', 'subtitle': 'Finalizar conta', 'sla': 5})
         self.assertEqual(result, 0)
     
     def test_add_an_activity_with_none_attributes(self):
         
-        data = examples.get('activities')
-        database.create_an_initialized_pegcontas_database(self.filename, data)
-        activity_repository = ActivityRepository(self.filename)
-        
+        activity_repository, _, _ = self.init_test_database()
         result = activity_repository.add({ 'title': None, 'subtitle': None, 'sla': None})
-        
         self.assertEqual(result, 1)
         
     def test_get_all_cards_with_empty_dataset(self):
@@ -89,39 +96,29 @@ class TestActivityRepository(unittest.TestCase):
         
     def test_get_all_cards_with_not_empty_dataset(self):
         
-        cards = examples.get('cards')
-        bills = examples.get('bills')
-        patients = examples.get('patients')
-        healthInjurances = examples.get('healthInsurances')
-        
-        database.create_an_initialized_pegcontas_database(self.filename,
-                                                          cards = cards,
-                                                          healthInjurances=healthInjurances,
-                                                          patients=patients,
-                                                          bills=bills)
-        
-        card_repository = CardRepository(self.filename)
-        
-        cards = card_repository.get_all()
-        
-        self.assertEqual(cards, outputs.get('cards'))
+        _, card_repository, _ = self.init_test_database()
+        self.assertEqual(card_repository.get_all(), outputs.get('cards'))
     
     def test_add_card(self):
         
-        cards = examples.get('cards')
-        bills = examples.get('bills')
-        patients = examples.get('patients')
-        healthInjurances = examples.get('healthInsurances')
+        _, card_repository, _ = self.init_test_database()
+        self.assertEqual(card_repository.add(test[0].get('input')), 0)
         
-        database.create_an_initialized_pegcontas_database(self.filename,
-                                                          cards = cards,
-                                                          healthInjurances=healthInjurances,
-                                                          patients=patients,
-                                                          bills=bills)
+    def test_get_card_by_patient_name(self):
         
-        card_repository = CardRepository(self.filename)
+        _, card_repository, _ = self.init_test_database()
         
-        self.assertEqual(card_repository.add(add_card_test[0].get('input')), 0)
+        self.assertEqual(card_repository.get_cards_by_patient_name(test[1].get('input')), test[1].get('output'))
+        
+    def test_get_card_by_billID(self):
+            
+        _, card_repository, _ = self.init_test_database()
+        self.assertEqual(card_repository.get_cards_by_billID(test[2].get('input')), test[2].get('output'))
+        
+    def test_get_card_by_visitID(self):
+            
+        _, card_repository, _ = self.init_test_database()
+        self.assertEqual(card_repository.get_cards_by_visitID(test[2].get('input')), test[3].get('output'))
             
 if __name__ == "__main__":
     

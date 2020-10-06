@@ -138,7 +138,7 @@ outputs = {
     ]
 }
 
-add_card_test = [
+test = [
     {
         'input' : {
             'cardID': 4,
@@ -159,5 +159,93 @@ add_card_test = [
                 'numberOfOpenPendencies': 0
             }
         }
+    },
+    {
+        'input'  : 'Fernando Leite Serrano',
+        'output' : [{
+            'cardID': 1,
+            'daysSinceCreated': 20,
+            'slaStatus': 'DELAYED',
+            'visitID': 1,
+            'numberOfDocuments': 0,
+            'numberOfNotReceivedDocuments': 1,
+            'numberOfChecklistItem': 0,
+            'numberOfDoneChecklistItem': 0,
+            'healthInsurance': { 'healthInsuranceID': 1, 'name': 'Maxima Seguro' },
+            'patient': { 'patientID' :  1, 'name': 'Fernando Leite Serrano' },
+            'bill' : { 
+                'billID': 1,
+                'billType': 'HOSPITALAR',
+                'totalAmount': 8925.55,
+                'numberOfPendencies': 0, 
+                'numberOfOpenPendencies': 0
+            }
+        }]
+    },
+    {
+        'input'  : 1,
+        'output' : [{
+            'cardID': 1,
+            'daysSinceCreated': 20,
+            'slaStatus': 'DELAYED',
+            'visitID': 1,
+            'numberOfDocuments': 0,
+            'numberOfNotReceivedDocuments': 1,
+            'numberOfChecklistItem': 0,
+            'numberOfDoneChecklistItem': 0,
+            'healthInsurance': { 'healthInsuranceID': 1, 'name': 'Maxima Seguro' },
+            'patient': { 'patientID' :  1, 'name': 'Fernando Leite Serrano' },
+            'bill' : { 
+                'billID': 1,
+                'billType': 'HOSPITALAR',
+                'totalAmount': 8925.55,
+                'numberOfPendencies': 0, 
+                'numberOfOpenPendencies': 0
+            }
+        }]
+    },
+    {
+        'input'  : 1,
+        'output' : [{
+            'cardID': 1,
+            'daysSinceCreated': 20,
+            'slaStatus': 'DELAYED',
+            'visitID': 1,
+            'numberOfDocuments': 0,
+            'numberOfNotReceivedDocuments': 1,
+            'numberOfChecklistItem': 0,
+            'numberOfDoneChecklistItem': 0,
+            'healthInsurance': { 'healthInsuranceID': 1, 'name': 'Maxima Seguro' },
+            'patient': { 'patientID' :  1, 'name': 'Fernando Leite Serrano' },
+            'bill' : { 
+                'billID': 1,
+                'billType': 'HOSPITALAR',
+                'totalAmount': 8925.55,
+                'numberOfPendencies': 0, 
+                'numberOfOpenPendencies': 0
+            }
+        }]
+    },
+    {
+        'input'  : 1,
+        'output' : [{
+            'cardID': 1,
+            'daysSinceCreated': 20,
+            'slaStatus': 'DELAYED',
+            'visitID': 1,
+            'numberOfDocuments': 0,
+            'numberOfNotReceivedDocuments': 1,
+            'numberOfChecklistItem': 0,
+            'numberOfDoneChecklistItem': 0,
+            'healthInsurance': { 'healthInsuranceID': 1, 'name': 'Maxima Seguro' },
+            'patient': { 'patientID' :  1, 'name': 'Fernando Leite Serrano' },
+            'bill' : { 
+                'billID': 1,
+                'billType': 'HOSPITALAR',
+                'totalAmount': 8925.55,
+                'numberOfPendencies': 0, 
+                'numberOfOpenPendencies': 0
+            }
+        }]
     }
 ]
