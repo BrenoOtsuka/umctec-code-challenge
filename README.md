@@ -30,7 +30,7 @@ Add activity : /api/v1/activity (POST)
 
 ``` json 
 {
-    "activityId" : 0 (optional),
+    "activityId" : 0, // optional
     "title": "Centro Cirurgico",
     "subtitle": "Agendar cirurgia",
     "sla": 2
@@ -77,7 +77,7 @@ Add card : /api/v1/card (POST)
         "numberOfChecklistItem": 0,
         "numberOfDoneChecklistItem": 0
     }
-``
+```
 
 IMPORTANTE: In the requests that uses Body, it is important to specify in the Header that Content-Type is equal to application/json
 
