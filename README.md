@@ -25,6 +25,7 @@ The challenge is to build an API to post and get activities and cards
 After install Python 3 and Flask, you run the project executing main.py. To send requests to the API, I used Postman. The routes are:
 
 Get all activity : /api/v1/activity/all (GET)
+
 Add activity : /api/v1/activity (POST)
 - In the Body (activityId is optional)
 
