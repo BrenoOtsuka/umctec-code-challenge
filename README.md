@@ -24,7 +24,7 @@ The challenge is to build an API to post and get activities and cards
 - [x] Get all activities:
 - [x] Create activity
 - [ ] Get cards by activityId
-- [ ] Search cards by patientName, visitId or billId
+- [x] Search cards by patientName, visitId or billId
 - [ ] filter by PRIORITY, TO_RECEIVE or TO_SEND
 - [ ] page: index of page
 - [ ] perPage: number of elements in each page
