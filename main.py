@@ -67,8 +67,12 @@ def find_cards():
         result = list(filter(lambda card: card['numberOfNotReceivedDocuments'] == 0 and 
                              card['numberOfDoneChecklistItem'] == card['numberOfChecklistItem'] and
                              card['bill']['numberOfOpenPendencies'] == 0, result))
+        
+    totalCardsOk      = len(list(filter(lambda card: card['slaStatus'] > 'OK'     , result)))
+    totalCardsWarning = len(list(filter(lambda card: card['slaStatus'] > 'WARNING', result)))
+    totalCardsDelayed = len(list(filter(lambda card: card['slaStatus'] > 'DELAYED', result)))
 
-    return jsonify(result)
+    return jsonify({'cards' : result, 'totalCardsOk': totalCardsOk, 'totalCardsWarning': totalCardsWarning, 'totalCardsDelayed': totalCardsDelayed })
 
 @app.route('/api/v1/card', methods=['POST'])
 def add_card():

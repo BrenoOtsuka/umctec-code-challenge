@@ -30,10 +30,8 @@ The challenge is to build an API to post and get activities and cards
 - [x] filter by PRIORITY
 - [x] filter by TO_RECEIVE
 - [x] filter by TO_SEND
+- [x] totalCardsOk: Number of cards (all pages) with slaStatus OK
+- [x] totalCardsWarning: Number of cards (all pages) with slaStatus WARNING
+- [x] totalCardsDelayed: Number of cards (all pages) with slaStatus DELAYED
 - [ ] get cards by activityId
-- [ ] totalCardsOk: Number of cards (all pages) with slaStatus OK
-- [ ] totalCardsWarning: Number of cards (all pages) with slaStatus WARNING
-- [ ] totalCardsDelayed: Number of cards (all pages) with slaStatus DELAYED
-- [ ] pageInfo: Add any new fields you think is important to build the pagination component in web page
-- [ ] filter by perPage: number of elements in each page
-- [ ] get by page: index of page
+- [ ] pagination
