@@ -1,6 +1,83 @@
 # umctec-code-challenge
 The challenge is to build an API to post and get activities and cards
 
+# Language and Libraries
+
+- Python 3.8.2
+- Flask 1.1.2
+- SQLite3 3.31.1
+
+# Project Structure
+
+- main.py creates the routes
+
+- testRepository.py contains the unit tests (To run the unit tests, execute this script)
+
+- miniexamples.py and examples contain the data used in the unit tests in a dictionary format
+
+- database.py contains some functions to create the database
+
+- cardRepository.py and activityRepository.py contain the functions to implement the API
+
+
+# Instructions to build and run the project
+
+After install Python 3 and Flask, you run the project executing main.py. To send requests to the API, I used Postman. The routes are:
+
+Get all activity : /api/v1/activity/all (GET)
+Add activity : /api/v1/activity (POST)
+- In the Body 
+
+`{
+    "activityId" : 0 (optional),
+    "title": "Centro Cirurgico",
+    "subtitle": "Agendar cirurgia",
+    "sla": 2
+}`
+
+
+Get card by : /api/v1/card?q=patientName&filter=PRIORITY
+- In the Body
+
+`{
+    "key" : "Graziely Scharf Borelli"
+}`
+
+- q can assume patientName, visitId or billId as value
+- filter can assume PRIORITY, TO_RECEIVE or TO_SEND as value
+
+Add card : /api/v1/card (POST)
+- In the Body  
+
+`
+{
+        "patient": {
+            "patientID": 0,
+            "name": "Fernando Leite Serrano"
+        },
+        "healthInsurance": {
+            "healthInsuranceID": 0,
+            "name": "Maxima Seguro"
+        },
+        "bill": {
+            "billID": 0,
+            "billType": "HOSPITALAR",
+            "numberOfPendencies": 10,
+            "numberOfOpenPendencies": 0,
+            "totalAmount": 8925.55
+        },
+        "visitId": 0,
+        "slaStatus": "DELAYED",
+        "daysSinceCreated": 20,
+        "numberOfDocuments": 3,
+        "numberOfNotReceivedDocuments": 2,
+        "numberOfChecklistItem": 0,
+        "numberOfDoneChecklistItem": 0
+    }
+`
+
+IMPORTANTE: In the requests that uses Body, it is important to specify in the Header that Content-Type is equal to application/json
+
 # Required
 
 - [ ] Create a Java Spring Boot project;
