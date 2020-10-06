@@ -26,11 +26,11 @@ After install Python 3 and Flask, you run the project executing main.py. To send
 
 Get all activity : /api/v1/activity/all (GET)
 Add activity : /api/v1/activity (POST)
-- In the Body 
+- In the Body (activityId is optional)
 
 ``` json 
 {
-    "activityId" : 0, // optional
+    "activityId" : 0,
     "title": "Centro Cirurgico",
     "subtitle": "Agendar cirurgia",
     "sla": 2
