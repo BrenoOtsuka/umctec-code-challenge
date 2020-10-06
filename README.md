@@ -28,20 +28,23 @@ Get all activity : /api/v1/activity/all (GET)
 Add activity : /api/v1/activity (POST)
 - In the Body 
 
-`{
+``` json 
+{
     "activityId" : 0 (optional),
     "title": "Centro Cirurgico",
     "subtitle": "Agendar cirurgia",
     "sla": 2
-}`
-
+}
+```
 
 Get card by : /api/v1/card?q=patientName&filter=PRIORITY
 - In the Body
 
-`{
+``` json 
+{
     "key" : "Graziely Scharf Borelli"
-}`
+}
+```
 
 - q can assume patientName, visitId or billId as value
 - filter can assume PRIORITY, TO_RECEIVE or TO_SEND as value
@@ -49,7 +52,7 @@ Get card by : /api/v1/card?q=patientName&filter=PRIORITY
 Add card : /api/v1/card (POST)
 - In the Body  
 
-`
+``` json 
 {
         "patient": {
             "patientID": 0,
@@ -74,7 +77,7 @@ Add card : /api/v1/card (POST)
         "numberOfChecklistItem": 0,
         "numberOfDoneChecklistItem": 0
     }
-`
+``
 
 IMPORTANTE: In the requests that uses Body, it is important to specify in the Header that Content-Type is equal to application/json
 
